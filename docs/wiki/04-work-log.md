@@ -116,3 +116,15 @@ git diff --check
 ```powershell
 python -m unittest tests.test_scripts
 ```
+
+### Remote DevCore 연동 규약 문서화
+
+- `docs/wiki/07-remote-devcore-integration.md` 추가
+- Discord/Whisper/Local Control Agent가 사용자 입력을 로컬 inbox 파일로 드롭하는 계약 정의
+- ChatGPT 세션 자동화 없이 `--watch` 감시 폴더로 연동하는 구조 명시
+
+검증 명령:
+
+```powershell
+git diff --check
+```

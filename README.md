@@ -150,3 +150,4 @@ python -m unittest discover -s tests
 - `docs/wiki/04-work-log.md`
 - `docs/wiki/05-claude-handoff.md`
 - `docs/wiki/06-session-continuity.md`
+- `docs/wiki/07-remote-devcore-integration.md`

@@ -17,6 +17,7 @@ ChatGPT `오늘의 플러스` 내용을 사용자가 직접 복사하거나 저�
 ## 현재 상태
 
 - Python CLI MVP 구현 완료
+- `jH Remote DevCore` 파일 드롭 연동 규약 문서화
 - GitHub 원격: `https://github.com/jaeha81/today-plus-obsidian-archiver.git`
 - 기본 브랜치: `main`
 - 테스트: `python -m unittest discover -s tests`
