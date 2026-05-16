@@ -105,6 +105,12 @@ python D:\ai프로젝트\today-plus-obsidian-archiver\main.py --watch
 powershell -ExecutionPolicy Bypass -File .\scripts\install-task-scheduler.ps1
 ```
 
+운영용 설정 파일을 따로 쓰려면 `-ConfigPath`를 지정합니다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install-task-scheduler.ps1 -ConfigPath "C:/Users/YOUR_NAME/today-plus-config.yaml"
+```
+
 기본으로 `TodayPlusArchiveClipboard`는 매일 09:00, `TodayPlusArchiveWatch`는 로그인 시 실행되도록 등록합니다.
 
 ## 테스트

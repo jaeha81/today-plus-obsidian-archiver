@@ -70,3 +70,14 @@ git diff --check
 python -m unittest tests.test_scripts
 python -m unittest tests.test_file_reader
 ```
+
+### 작업 스케줄러 설정 경로 보강
+
+- `scripts/install-task-scheduler.ps1`에 선택적 `-ConfigPath` 추가
+- 작업 스케줄러 등록 시 운영용 config 파일을 명시할 수 있도록 README 갱신
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_scripts
+```

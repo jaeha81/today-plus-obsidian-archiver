@@ -2,7 +2,8 @@ param(
     [string]$ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
     [string]$PythonCommand = "python",
     [string]$TaskPrefix = "TodayPlusArchive",
-    [string]$ClipboardTime = "09:00"
+    [string]$ClipboardTime = "09:00",
+    [string]$ConfigPath = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -17,12 +18,22 @@ if (Test-Path $venvPython) {
     $PythonCommand = $venvPython
 }
 
+if ($ConfigPath) {
+    if (-not (Test-Path $ConfigPath)) {
+        throw "ConfigPath not found: $ConfigPath"
+    }
+    $resolvedConfigPath = (Resolve-Path $ConfigPath).Path
+    $configArgument = " --config `"$resolvedConfigPath`""
+} else {
+    $configArgument = ""
+}
+
 $clipboardTaskName = "${TaskPrefix}Clipboard"
 $watchTaskName = "${TaskPrefix}Watch"
 
 $clipboardAction = New-ScheduledTaskAction `
     -Execute $PythonCommand `
-    -Argument "`"$mainPath`" --clipboard" `
+    -Argument "`"$mainPath`"$configArgument --clipboard" `
     -WorkingDirectory $ProjectRoot
 $clipboardTrigger = New-ScheduledTaskTrigger -Daily -At $ClipboardTime
 
@@ -35,7 +46,7 @@ Register-ScheduledTask `
 
 $watchAction = New-ScheduledTaskAction `
     -Execute $PythonCommand `
-    -Argument "`"$mainPath`" --watch" `
+    -Argument "`"$mainPath`"$configArgument --watch" `
     -WorkingDirectory $ProjectRoot
 $watchTrigger = New-ScheduledTaskTrigger -AtLogOn
 
@@ -49,3 +60,6 @@ Register-ScheduledTask `
 Write-Host "Registered scheduled tasks:"
 Write-Host " - $clipboardTaskName daily at $ClipboardTime"
 Write-Host " - $watchTaskName at logon"
+if ($ConfigPath) {
+    Write-Host "Using config: $resolvedConfigPath"
+}

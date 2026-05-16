@@ -35,6 +35,14 @@ class ScriptsTest(unittest.TestCase):
         self.assertNotIn("chat.openai.com", content.lower())
         self.assertNotIn("cookie", content.lower())
 
+    def test_task_scheduler_installer_accepts_config_path(self):
+        script = SCRIPTS_DIR / "install-task-scheduler.ps1"
+
+        content = script.read_text(encoding="utf-8")
+        self.assertIn("[string]$ConfigPath", content)
+        self.assertIn("--config", content)
+        self.assertIn("Test-Path $ConfigPath", content)
+
 
 if __name__ == "__main__":
     unittest.main()
