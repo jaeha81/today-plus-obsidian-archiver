@@ -223,3 +223,17 @@ python -m unittest tests.test_scripts
 ```powershell
 python -m unittest tests.test_scripts
 ```
+
+### Remote DevCore 파일 드롭 E2E smoke 준비
+
+- `scripts/smoke-remote-devcore-file-drop.ps1` 추가
+- Local Control Agent 방식처럼 `today-plus-e2e.tmp` 작성 후 `today-plus-e2e.md` rename을 재현
+- 임시 Vault/inbox에서 `--process-inbox-once --archive-processed`를 실행해 processed 이동과 Vault 노트 생성을 검증
+- README와 `scripts/README.md`에 실행법 문서화
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_scripts
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-file-drop.ps1
+```

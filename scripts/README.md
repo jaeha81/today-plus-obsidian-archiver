@@ -63,6 +63,14 @@ powershell -ExecutionPolicy Bypass -File .\scripts\smoke-process-inbox-once.ps1
 
 스크립트는 `.tmp` 파일이 inbox에 남고, `.md` 파일이 처리 후 `processed`로 이동하며, 임시 Vault에 노트가 생성되는지 확인한 뒤 임시 폴더를 정리한다.
 
+Remote DevCore 실제 파일 드롭 방식인 `.tmp` 작성 후 `.md` rename까지 재현하려면 아래 smoke 스크립트를 실행한다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-file-drop.ps1
+```
+
+스크립트는 `today-plus-e2e.tmp`를 만든 뒤 `today-plus-e2e.md`로 이동하고, `--process-inbox-once --archive-processed` 실행 결과 `processed` 이동과 Vault 노트 생성을 검증한다.
+
 ## 작업 스케줄러 등록
 
 기본 등록:

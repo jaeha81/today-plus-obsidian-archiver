@@ -115,6 +115,12 @@ scripts\run-process-inbox-once.bat --config config.remote-devcore.yaml --archive
 
 기본 동작은 원본 파일을 inbox에 그대로 두는 것입니다.
 
+Remote DevCore 파일 드롭 end-to-end 준비 상태는 임시 inbox/vault에서 `.tmp` 작성 후 `.md` rename을 재현하는 smoke 스크립트로 확인할 수 있습니다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-file-drop.ps1
+```
+
 ## 중복 인덱스 재생성
 
 기존 TodayPlus 폴더의 Markdown 파일을 다시 읽어 `.today_plus_index.json`을 재생성합니다.

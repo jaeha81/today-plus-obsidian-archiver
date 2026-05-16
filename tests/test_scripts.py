@@ -45,6 +45,19 @@ class ScriptsTest(unittest.TestCase):
         self.assertIn("INBOX_FILE_COUNT", content)
         self.assertIn("PROCESSED_FILES", content)
 
+    def test_remote_devcore_file_drop_smoke_script_simulates_tmp_rename_drop(self):
+        script = SCRIPTS_DIR / "smoke-remote-devcore-file-drop.ps1"
+
+        self.assertTrue(script.exists())
+        content = script.read_text(encoding="utf-8")
+        self.assertIn("today-plus-e2e.tmp", content)
+        self.assertIn("today-plus-e2e.md", content)
+        self.assertIn("Move-Item", content)
+        self.assertIn("--process-inbox-once", content)
+        self.assertIn("--archive-processed", content)
+        self.assertIn("PROCESSED_FILES", content)
+        self.assertIn("VAULT_NOTE_COUNT", content)
+
     def test_file_runner_exists_and_uses_file_mode(self):
         script = SCRIPTS_DIR / "run-file.bat"
 
