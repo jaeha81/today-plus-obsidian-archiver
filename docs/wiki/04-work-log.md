@@ -36,6 +36,18 @@ d78ebe2 Initial Today Plus Obsidian archiver
 - `docs/wiki` 생성
 - 요구사항, 아키텍처, 결정사항, 작업로그, Claude 인계 문서화
 
+커밋:
+
+```text
+3347a82 Add LLM wiki documentation
+```
+
+### 세션 연속성 프로토콜
+
+- Goal Mode 컨텍스트 압축 전 사용자 고지 절차 정의
+- 세션 종료 전 Wiki 반영 절차 정의
+- 새 세션에서 이어갈 시작 명령문 템플릿 추가
+
 검증 명령:
 
 ```powershell

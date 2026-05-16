@@ -27,3 +27,9 @@ Codex가 본 개발을 주도한다. Claude는 필요 시 보조 구현, 검수 
 3. `scripts/install-task-scheduler.ps1` 추가
 4. `tests/test_file_reader.py`로 HTML 링크 변환 검증 강화
 5. 실제 Vault 경로에서 수동 smoke test
+
+## 세션 전환 시 Claude 보조 가능 작업
+
+- `docs/wiki/04-work-log.md`에 작업 요약 append
+- 새 세션 시작 명령문을 사용자에게 전달할 수 있게 정리
+- Codex가 개발 주도권을 유지하도록 구현 변경 전 요구사항 재확인
