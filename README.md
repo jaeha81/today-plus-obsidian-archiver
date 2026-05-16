@@ -121,6 +121,12 @@ Remote DevCore 파일 드롭 end-to-end 준비 상태는 임시 inbox/vault에�
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-file-drop.ps1
 ```
 
+Remote DevCore CLI까지 포함한 교차 프로젝트 E2E는 아래 명령으로 확인합니다. 이 smoke는 임시 inbox/vault만 사용합니다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-cli-e2e.ps1
+```
+
 ## 중복 인덱스 재생성
 
 기존 TodayPlus 폴더의 Markdown 파일을 다시 읽어 `.today_plus_index.json`을 재생성합니다.

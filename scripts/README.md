@@ -71,6 +71,14 @@ powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-file-dro
 
 스크립트는 `today-plus-e2e.tmp`를 만든 뒤 `today-plus-e2e.md`로 이동하고, `--process-inbox-once --archive-processed` 실행 결과 `processed` 이동과 Vault 노트 생성을 검증한다.
 
+Remote DevCore CLI가 실제로 inbox 파일을 쓰고 archiver가 처리하는 교차 프로젝트 E2E는 아래 명령으로 확인한다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-cli-e2e.ps1
+```
+
+스크립트는 sibling 폴더 `jH Remote DevCore`를 찾아 `TODAY_PLUS_INBOX`를 임시 inbox로 지정하고, `node src/cli.js --text ...` 실행 후 archiver의 `--process-inbox-once --archive-processed`까지 검증한다.
+
 ## 작업 스케줄러 등록
 
 기본 등록:

@@ -58,6 +58,22 @@ class ScriptsTest(unittest.TestCase):
         self.assertIn("PROCESSED_FILES", content)
         self.assertIn("VAULT_NOTE_COUNT", content)
 
+    def test_remote_devcore_cli_e2e_smoke_script_runs_devcore_then_archiver(self):
+        script = SCRIPTS_DIR / "smoke-remote-devcore-cli-e2e.ps1"
+
+        self.assertTrue(script.exists())
+        content = script.read_text(encoding="utf-8")
+        self.assertIn("jH Remote DevCore", content)
+        self.assertIn("Split-Path $projectRoot -Parent", content)
+        self.assertIn("TODAY_PLUS_INBOX", content)
+        self.assertIn("node", content)
+        self.assertIn("src/cli.js", content)
+        self.assertIn("--text", content)
+        self.assertIn("--process-inbox-once", content)
+        self.assertIn("--archive-processed", content)
+        self.assertIn("DEVCORE_DROPPED_FILES", content)
+        self.assertIn("VAULT_NOTE_COUNT", content)
+
     def test_file_runner_exists_and_uses_file_mode(self):
         script = SCRIPTS_DIR / "run-file.bat"
 

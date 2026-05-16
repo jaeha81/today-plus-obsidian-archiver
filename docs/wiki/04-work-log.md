@@ -237,3 +237,18 @@ python -m unittest tests.test_scripts
 python -m unittest tests.test_scripts
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-file-drop.ps1
 ```
+
+### Remote DevCore CLI 교차 프로젝트 E2E smoke 준비
+
+- `scripts/smoke-remote-devcore-cli-e2e.ps1` 추가
+- sibling 폴더 `jH Remote DevCore`의 `node src/cli.js --text ...`를 실행해 실제 DevCore writer가 임시 inbox에 `today-plus-*.md`를 쓰는지 검증
+- 같은 임시 inbox를 archiver `--process-inbox-once --archive-processed`로 처리해 processed 이동과 Vault 노트 생성을 검증
+- 한글 경로 리터럴 인코딩 문제를 피하기 위해 프로젝트 부모 경로에서 Remote DevCore 경로를 조합하도록 구현
+- README와 `scripts/README.md`에 실행법 문서화
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_scripts
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-cli-e2e.ps1
+```
