@@ -128,3 +128,15 @@ python -m unittest tests.test_scripts
 ```powershell
 git diff --check
 ```
+
+### Remote DevCore 파일 드롭 처리 보강
+
+- watch 모드 처리 로직을 `handle_watch_path`로 분리
+- `.tmp` 파일 생성 이벤트는 무시하고 최종 지원 확장자만 처리하도록 테스트 추가
+- Local Control Agent의 `.tmp` 쓰기 후 `.md` rename 흐름을 위해 watchdog `on_moved` 이벤트 처리 추가
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_main_workflow
+```

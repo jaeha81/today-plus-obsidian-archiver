@@ -57,6 +57,8 @@ today-plus-20260516-213000.tmp
 today-plus-20260516-213000.md
 ```
 
+아카이버 watch 모드는 `.tmp` 생성 이벤트를 무시하고, 최종 `.md`, `.txt`, `.html`, `.htm` 파일 생성 또는 rename 이벤트를 처리한다.
+
 ## 파일 내용 권장 형식
 
 ```markdown
@@ -106,6 +108,5 @@ python main.py --watch
 
 ## 다음 구현 후보
 
-- 아카이버 watch 모드에서 `.tmp` 파일 명시적 무시 테스트 추가
 - Remote DevCore sample payload 문서화
 - 실제 inbox 경로를 별도 운영 config 예시로 분리

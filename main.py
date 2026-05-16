@@ -68,6 +68,15 @@ def archive_text(text: str, config: dict[str, Any]) -> Path | None:
     return note_path
 
 
+def handle_watch_path(path: Path, config: dict[str, Any]) -> bool:
+    file_path = Path(path)
+    if file_path.suffix.lower() not in {".html", ".htm", ".txt", ".md"}:
+        print(f"지원하지 않는 파일 무시: {file_path}")
+        return False
+    archive_text(read_input_file(file_path), config)
+    return True
+
+
 def watch_folder(config: dict[str, Any]) -> None:
     try:
         from watchdog.events import FileSystemEventHandler
@@ -82,11 +91,12 @@ def watch_folder(config: dict[str, Any]) -> None:
         def on_created(self, event: Any) -> None:
             if event.is_directory:
                 return
-            path = Path(event.src_path)
-            if path.suffix.lower() not in {".html", ".htm", ".txt", ".md"}:
-                print(f"지원하지 않는 파일 무시: {path}")
+            handle_watch_path(Path(event.src_path), config)
+
+        def on_moved(self, event: Any) -> None:
+            if event.is_directory:
                 return
-            archive_text(read_input_file(path), config)
+            handle_watch_path(Path(event.dest_path), config)
 
     observer = Observer()
     observer.schedule(Handler(), str(input_folder), recursive=False)

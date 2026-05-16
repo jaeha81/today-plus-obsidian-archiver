@@ -1,8 +1,9 @@
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-from main import archive_text, load_config, parse_args
+from main import archive_text, handle_watch_path, load_config, parse_args
 
 
 class MainWorkflowTest(unittest.TestCase):
@@ -45,6 +46,28 @@ class MainWorkflowTest(unittest.TestCase):
 
         self.assertEqual(args.config, "custom.yaml")
         self.assertEqual(args.file, "input.md")
+
+    def test_watch_path_ignores_temp_files(self):
+        config = {"obsidian_vault_path": "unused"}
+
+        with patch("main.read_input_file") as read_input_file:
+            handled = handle_watch_path(Path("today-plus.tmp"), config)
+
+        self.assertFalse(handled)
+        read_input_file.assert_not_called()
+
+    def test_watch_path_archives_supported_files(self):
+        config = {"obsidian_vault_path": "unused"}
+
+        with (
+            patch("main.read_input_file", return_value="Today Plus content") as read_input_file,
+            patch("main.archive_text") as archive_text_mock,
+        ):
+            handled = handle_watch_path(Path("today-plus.md"), config)
+
+        self.assertTrue(handled)
+        read_input_file.assert_called_once_with(Path("today-plus.md"))
+        archive_text_mock.assert_called_once_with("Today Plus content", config)
 
 
 if __name__ == "__main__":
