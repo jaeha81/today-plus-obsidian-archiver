@@ -211,3 +211,15 @@ python -m unittest tests.test_main_workflow
 ```powershell
 python -m unittest tests.test_scripts
 ```
+
+### Inbox 1회 처리 smoke 스크립트 추가
+
+- `scripts/smoke-process-inbox-once.ps1` 추가
+- 임시 Vault/inbox로 `--process-inbox-once --archive-processed` 검증 자동화
+- smoke test 실행법을 `scripts/README.md`에 문서화
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_scripts
+```

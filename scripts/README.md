@@ -53,6 +53,16 @@ scripts\run-process-inbox-once.bat --config config.remote-devcore.yaml --archive
 
 `--archive-processed`를 추가하면 처리 성공한 원본 파일을 `inbox\processed\`로 이동한다. 기본 동작은 원본 유지다.
 
+## Smoke test
+
+임시 Vault와 임시 inbox로 1회 처리와 `processed` 이동을 검증한다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-process-inbox-once.ps1
+```
+
+스크립트는 `.tmp` 파일이 inbox에 남고, `.md` 파일이 처리 후 `processed`로 이동하며, 임시 Vault에 노트가 생성되는지 확인한 뒤 임시 폴더를 정리한다.
+
 ## 작업 스케줄러 등록
 
 기본 등록:

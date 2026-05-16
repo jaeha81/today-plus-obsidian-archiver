@@ -33,6 +33,18 @@ class ScriptsTest(unittest.TestCase):
         self.assertIn("--archive-processed", content)
         self.assertIn('"%~1"=="--help"', content)
 
+    def test_smoke_process_inbox_once_script_uses_temp_workspace_and_archive_processed(self):
+        script = SCRIPTS_DIR / "smoke-process-inbox-once.ps1"
+
+        self.assertTrue(script.exists())
+        content = script.read_text(encoding="utf-8")
+        self.assertIn("--process-inbox-once", content)
+        self.assertIn("--archive-processed", content)
+        self.assertIn("Remove-Item", content)
+        self.assertIn("StartsWith", content)
+        self.assertIn("INBOX_FILE_COUNT", content)
+        self.assertIn("PROCESSED_FILES", content)
+
     def test_file_runner_exists_and_uses_file_mode(self):
         script = SCRIPTS_DIR / "run-file.bat"
 
