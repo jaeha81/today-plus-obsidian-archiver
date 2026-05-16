@@ -100,6 +100,14 @@ python main.py --config config.remote-devcore.yaml --watch
 python main.py --config config.remote-devcore.yaml --process-inbox-once
 ```
 
+처리 완료된 원본 파일을 `inbox/processed/`로 옮기려면 명시적으로 옵션을 추가합니다.
+
+```powershell
+python main.py --config config.remote-devcore.yaml --process-inbox-once --archive-processed
+```
+
+기본 동작은 원본 파일을 inbox에 그대로 두는 것입니다.
+
 ## 중복 인덱스 재생성
 
 기존 TodayPlus 폴더의 Markdown 파일을 다시 읽어 `.today_plus_index.json`을 재생성합니다.

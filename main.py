@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import shutil
 import sys
 from datetime import date
 from pathlib import Path
@@ -79,9 +80,21 @@ def handle_watch_path(path: Path, config: dict[str, Any]) -> bool:
     return True
 
 
-def process_inbox_once(config: dict[str, Any]) -> int:
+def processed_path_for(path: Path, processed_dir: Path) -> Path:
+    destination = processed_dir / path.name
+    if not destination.exists():
+        return destination
+    for index in range(1, 1000):
+        candidate = processed_dir / f"{path.stem}-{index}{path.suffix}"
+        if not candidate.exists():
+            return candidate
+    raise RuntimeError(f"처리 완료 파일명을 정할 수 없습니다: {path.name}")
+
+
+def process_inbox_once(config: dict[str, Any], archive_processed: bool = False) -> int:
     input_folder = Path(config["input_folder"]).expanduser()
     input_folder.mkdir(parents=True, exist_ok=True)
+    processed_dir = input_folder / "processed"
     count = 0
     for path in sorted(input_folder.iterdir()):
         if (
@@ -90,6 +103,9 @@ def process_inbox_once(config: dict[str, Any]) -> int:
             and handle_watch_path(path, config)
         ):
             count += 1
+            if archive_processed:
+                processed_dir.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(path), processed_path_for(path, processed_dir))
     print(f"inbox 1회 처리 완료: {count}개")
     return count
 
@@ -139,6 +155,7 @@ def rebuild_index(config: dict[str, Any]) -> int:
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="ChatGPT 오늘의 플러스를 Obsidian 노트로 저장합니다.")
     parser.add_argument("--config", default="config.yaml", help="설정 파일 경로")
+    parser.add_argument("--archive-processed", action="store_true", help="1회 처리 후 원본을 processed 폴더로 이동")
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--clipboard", action="store_true", help="클립보드 텍스트 저장")
     mode.add_argument("--file", type=str, help="HTML/TXT/MD 파일 저장")
@@ -160,7 +177,7 @@ def main() -> int:
         elif args.watch:
             watch_folder(config)
         elif args.process_inbox_once:
-            process_inbox_once(config)
+            process_inbox_once(config, archive_processed=args.archive_processed)
         elif args.rebuild_index:
             rebuild_index(config)
         return 0

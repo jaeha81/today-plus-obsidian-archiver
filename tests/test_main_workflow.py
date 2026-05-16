@@ -103,6 +103,40 @@ class MainWorkflowTest(unittest.TestCase):
             [input_folder / "b.md", input_folder / "c.txt"],
         )
 
+    def test_process_inbox_once_can_move_processed_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            input_folder = Path(tmp) / "inbox"
+            input_folder.mkdir()
+            markdown_path = input_folder / "today-plus.md"
+            markdown_path.write_text("Today Plus markdown", encoding="utf-8")
+            config = {"input_folder": str(input_folder), "obsidian_vault_path": "unused"}
+
+            with patch("main.handle_watch_path", return_value=True):
+                count = process_inbox_once(config, archive_processed=True)
+
+            processed_path = input_folder / "processed" / "today-plus.md"
+            self.assertEqual(count, 1)
+            self.assertFalse(markdown_path.exists())
+            self.assertTrue(processed_path.exists())
+
+    def test_process_inbox_once_does_not_overwrite_processed_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            input_folder = Path(tmp) / "inbox"
+            processed_folder = input_folder / "processed"
+            processed_folder.mkdir(parents=True)
+            markdown_path = input_folder / "today-plus.md"
+            existing_processed_path = processed_folder / "today-plus.md"
+            markdown_path.write_text("new content", encoding="utf-8")
+            existing_processed_path.write_text("existing content", encoding="utf-8")
+            config = {"input_folder": str(input_folder), "obsidian_vault_path": "unused"}
+
+            with patch("main.handle_watch_path", return_value=True):
+                count = process_inbox_once(config, archive_processed=True)
+
+            self.assertEqual(count, 1)
+            self.assertEqual(existing_processed_path.read_text(encoding="utf-8"), "existing content")
+            self.assertTrue((processed_folder / "today-plus-1.md").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

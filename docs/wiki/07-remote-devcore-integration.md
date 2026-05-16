@@ -181,6 +181,14 @@ python main.py --watch
 python main.py --config config.remote-devcore.yaml --process-inbox-once
 ```
 
+기본 동작은 원본 inbox 파일을 그대로 둔다. 처리 완료 원본을 보관 폴더로 이동하려면 명시적으로 옵션을 추가한다.
+
+```powershell
+python main.py --config config.remote-devcore.yaml --process-inbox-once --archive-processed
+```
+
+이 옵션은 처리 성공한 지원 확장자 파일만 `inbox/processed/`로 이동한다. 같은 파일명이 이미 있으면 덮어쓰지 않고 `-1`, `-2` 같은 suffix를 붙인다.
+
 3. Remote DevCore에서 테스트 메시지를 보낸다.
 4. Local Control Agent가 inbox 폴더에 `.md` 파일을 생성하는지 확인한다.
 5. 아카이버가 Obsidian TodayPlus 노트로 저장하는지 확인한다.

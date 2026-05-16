@@ -188,3 +188,15 @@ python -m unittest tests.test_main_workflow
 ```powershell
 python -m unittest tests.test_main_workflow
 ```
+
+### 처리 완료 파일 보관 옵션 추가
+
+- `--archive-processed` CLI 옵션 추가
+- `--process-inbox-once`에서 처리 성공한 원본 파일을 `inbox/processed/`로 이동 가능
+- 기본 동작은 원본 유지이며, 동일 파일명 충돌 시 suffix를 붙여 덮어쓰지 않도록 구현
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_main_workflow
+```
