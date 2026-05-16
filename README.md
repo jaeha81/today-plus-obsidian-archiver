@@ -120,6 +120,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\install-task-scheduler.ps1 -C
 
 기본으로 `TodayPlusArchiveClipboard`는 매일 09:00, `TodayPlusArchiveWatch`는 로그인 시 실행되도록 등록합니다.
 
+Windows 보조 스크립트 전체 사용법은 `scripts/README.md`에 정리되어 있습니다.
+
 ## 테스트
 
 ```powershell

@@ -92,3 +92,15 @@ python -m unittest tests.test_scripts
 ```powershell
 python -m unittest tests.test_scripts
 ```
+
+### Windows 스크립트 문서화
+
+- `scripts/README.md` 추가
+- 클립보드, 파일 입력, 폴더 감시, 작업 스케줄러 등록 사용법을 스크립트 폴더에 정리
+- 최상위 README에서 스크립트 문서 위치 안내
+
+검증 명령:
+
+```powershell
+git diff --check
+```
