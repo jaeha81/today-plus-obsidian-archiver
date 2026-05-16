@@ -56,6 +56,13 @@ python main.py --file "C:/Users/YOUR_NAME/Downloads/today_plus.html"
 
 HTML은 `script`, `style`, `nav`, `footer`를 제거하고 본문 텍스트와 Markdown 링크를 추출합니다.
 
+Windows에서는 배치 파일로도 실행할 수 있습니다.
+
+```powershell
+scripts\run-file.bat "C:/Users/YOUR_NAME/Downloads/today_plus.html"
+scripts\run-file.bat "C:/Users/YOUR_NAME/Downloads/today_plus.html" --config "C:/Users/YOUR_NAME/today-plus-config.yaml"
+```
+
 ## 파일 감시 모드
 
 `config.yaml`의 `input_folder`에 파일이 생기면 자동 저장합니다.

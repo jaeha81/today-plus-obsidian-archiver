@@ -23,6 +23,17 @@ class ScriptsTest(unittest.TestCase):
         self.assertIn("main.py", content)
         self.assertIn("--watch", content)
 
+    def test_file_runner_exists_and_uses_file_mode(self):
+        script = SCRIPTS_DIR / "run-file.bat"
+
+        self.assertTrue(script.exists())
+        content = script.read_text(encoding="utf-8")
+        self.assertIn("main.py", content)
+        self.assertIn("--file", content)
+        self.assertIn("%~1", content)
+        self.assertIn('"%~1"=="--help"', content)
+        self.assertNotIn("--file \"%~1\" %*", content)
+
     def test_task_scheduler_installer_registers_non_web_local_modes(self):
         script = SCRIPTS_DIR / "install-task-scheduler.ps1"
 

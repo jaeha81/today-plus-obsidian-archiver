@@ -81,3 +81,14 @@ python -m unittest tests.test_file_reader
 ```powershell
 python -m unittest tests.test_scripts
 ```
+
+### 파일 입력 실행 스크립트 추가
+
+- `scripts/run-file.bat` 추가
+- HTML/TXT/MD 직접 파일 입력을 Windows 배치 파일로 실행 가능하게 README 갱신
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_scripts
+```
