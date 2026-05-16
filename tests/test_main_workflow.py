@@ -41,6 +41,16 @@ class MainWorkflowTest(unittest.TestCase):
 
             self.assertEqual(config["output_folder"], "Inbox")
 
+    def test_remote_devcore_example_config_loads(self):
+        config = load_config(Path("config.example.remote-devcore.yaml"))
+
+        self.assertEqual(
+            config["input_folder"],
+            "D:/ai프로젝트/today-plus-obsidian-archiver/inbox",
+        )
+        self.assertIn("today-plus", config["default_tags"])
+        self.assertIn("ChatGPT", config["related_links"])
+
     def test_parse_args_accepts_explicit_config_path(self):
         args = parse_args(["--config", "custom.yaml", "--file", "input.md"])
 

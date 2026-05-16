@@ -87,6 +87,13 @@ scripts\run-watch.bat
 scripts\run-watch.bat --config "C:/Users/YOUR_NAME/today-plus-config.yaml"
 ```
 
+`jH Remote DevCore`와 연동할 때는 샘플 config를 복사해 Vault 경로만 수정해서 사용할 수 있습니다.
+
+```powershell
+copy config.example.remote-devcore.yaml config.remote-devcore.yaml
+python main.py --config config.remote-devcore.yaml --watch
+```
+
 ## 중복 인덱스 재생성
 
 기존 TodayPlus 폴더의 Markdown 파일을 다시 읽어 `.today_plus_index.json`을 재생성합니다.

@@ -29,6 +29,19 @@
 input_folder: "D:/ai프로젝트/today-plus-obsidian-archiver/inbox"
 ```
 
+샘플 운영 config:
+
+```text
+config.example.remote-devcore.yaml
+```
+
+사용 전 `obsidian_vault_path`를 실제 Obsidian Vault 경로로 바꾼 사본을 만든다.
+
+```powershell
+copy config.example.remote-devcore.yaml config.remote-devcore.yaml
+python main.py --config config.remote-devcore.yaml --watch
+```
+
 지원 확장자:
 
 - `.md`
@@ -168,4 +181,4 @@ python main.py --watch
 
 ## 다음 구현 후보
 
-- 실제 inbox 경로를 별도 운영 config 예시로 분리
+- Remote DevCore와 실제 end-to-end smoke test

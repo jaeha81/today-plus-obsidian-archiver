@@ -164,3 +164,15 @@ python -m unittest discover -s tests
 ```powershell
 git diff --check
 ```
+
+### Remote DevCore 샘플 config 추가
+
+- `config.example.remote-devcore.yaml` 추가
+- Remote DevCore 파일 드롭용 `input_folder`와 관련 태그 기본값 제공
+- README와 연동 문서에 샘플 config 복사/실행 방법 추가
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_main_workflow
+```
