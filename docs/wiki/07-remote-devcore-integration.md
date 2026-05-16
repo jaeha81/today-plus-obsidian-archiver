@@ -75,6 +75,66 @@ sender: user
 
 현재 아카이버는 파일 전체를 원문으로 처리한다. 위 metadata는 사람이 추적하기 위한 참고 정보이며, 별도 파싱 계약은 아직 없다.
 
+## Remote DevCore sample payload
+
+Discord slash command 예:
+
+```text
+/todayplus 오늘의 플러스 원문 내용...
+```
+
+Discord 태그 라우팅 예:
+
+```text
+#todayplus
+오늘의 플러스 원문 내용...
+```
+
+Whisper Agent Bot 텍스트 라우팅 예:
+
+```text
+오늘의 플러스 저장:
+오늘의 플러스 원문 내용...
+```
+
+Remote DevCore가 Local Control Agent로 넘기는 내부 payload 권장 형식:
+
+```json
+{
+  "type": "today_plus",
+  "source": "discord",
+  "sender": "user",
+  "received_at": "2026-05-16T21:30:00+09:00",
+  "content": "오늘의 플러스 원문 내용..."
+}
+```
+
+Local Control Agent 출력 파일 예:
+
+```markdown
+# Today Plus
+
+source: discord
+received_at: 2026-05-16T21:30:00+09:00
+sender: user
+
+---
+
+오늘의 플러스 원문 내용...
+```
+
+성공 응답 예:
+
+```text
+Today Plus queued: today-plus-20260516-213000.md
+```
+
+실패 응답 예:
+
+```text
+Today Plus queue failed: inbox path is not writable
+```
+
 ## Remote DevCore 구현 요구
 
 1. Today Plus 전용 명령 또는 라우팅 태그를 제공한다.
@@ -108,5 +168,4 @@ python main.py --watch
 
 ## 다음 구현 후보
 
-- Remote DevCore sample payload 문서화
 - 실제 inbox 경로를 별도 운영 config 예시로 분리

@@ -152,3 +152,15 @@ python -m unittest tests.test_main_workflow
 ```powershell
 python -m unittest discover -s tests
 ```
+
+### Remote DevCore sample payload 문서화
+
+- Discord slash command, 태그 라우팅, Whisper 텍스트 라우팅 예시 추가
+- Remote DevCore 내부 payload 권장 JSON 형식 추가
+- Local Control Agent 출력 파일, 성공 응답, 실패 응답 예시 추가
+
+검증 명령:
+
+```powershell
+git diff --check
+```
