@@ -100,10 +100,17 @@ python main.py --config config.remote-devcore.yaml --watch
 python main.py --config config.remote-devcore.yaml --process-inbox-once
 ```
 
+Windows에서는 배치 파일로도 실행할 수 있습니다.
+
+```powershell
+scripts\run-process-inbox-once.bat --config config.remote-devcore.yaml
+```
+
 처리 완료된 원본 파일을 `inbox/processed/`로 옮기려면 명시적으로 옵션을 추가합니다.
 
 ```powershell
 python main.py --config config.remote-devcore.yaml --process-inbox-once --archive-processed
+scripts\run-process-inbox-once.bat --config config.remote-devcore.yaml --archive-processed
 ```
 
 기본 동작은 원본 파일을 inbox에 그대로 두는 것입니다.

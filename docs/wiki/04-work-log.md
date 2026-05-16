@@ -200,3 +200,14 @@ python -m unittest tests.test_main_workflow
 ```powershell
 python -m unittest tests.test_main_workflow
 ```
+
+### Inbox 1회 처리 Windows 스크립트 추가
+
+- `scripts/run-process-inbox-once.bat` 추가
+- Remote DevCore 파일 드롭 후 1회 처리와 `--archive-processed` 옵션을 배치 파일로 실행 가능하게 문서화
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_scripts
+```

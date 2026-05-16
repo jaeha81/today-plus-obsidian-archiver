@@ -42,6 +42,17 @@ scripts\run-watch.bat
 scripts\run-watch.bat --config "C:/Users/YOUR_NAME/today-plus-config.yaml"
 ```
 
+## Inbox 1회 처리
+
+Remote DevCore가 파일을 드롭한 뒤 장시간 감시 없이 현재 inbox 파일만 한 번 처리한다.
+
+```powershell
+scripts\run-process-inbox-once.bat --config config.remote-devcore.yaml
+scripts\run-process-inbox-once.bat --config config.remote-devcore.yaml --archive-processed
+```
+
+`--archive-processed`를 추가하면 처리 성공한 원본 파일을 `inbox\processed\`로 이동한다. 기본 동작은 원본 유지다.
+
 ## 작업 스케줄러 등록
 
 기본 등록:

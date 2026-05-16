@@ -23,6 +23,16 @@ class ScriptsTest(unittest.TestCase):
         self.assertIn("main.py", content)
         self.assertIn("--watch", content)
 
+    def test_process_inbox_once_runner_exists_and_uses_one_shot_mode(self):
+        script = SCRIPTS_DIR / "run-process-inbox-once.bat"
+
+        self.assertTrue(script.exists())
+        content = script.read_text(encoding="utf-8")
+        self.assertIn("main.py", content)
+        self.assertIn("--process-inbox-once", content)
+        self.assertIn("--archive-processed", content)
+        self.assertIn('"%~1"=="--help"', content)
+
     def test_file_runner_exists_and_uses_file_mode(self):
         script = SCRIPTS_DIR / "run-file.bat"
 
