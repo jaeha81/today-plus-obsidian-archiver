@@ -140,3 +140,15 @@ git diff --check
 ```powershell
 python -m unittest tests.test_main_workflow
 ```
+
+### Remote DevCore inbox 설정 정리
+
+- `config.yaml`의 `input_folder`를 로컬 `inbox` 폴더로 확정
+- 깨진 한글 `related_links` 문자열을 UTF-8 기준으로 복구
+- `inbox/.gitkeep` 추가로 Local Control Agent 파일 드롭 대상 폴더를 저장소에 명시
+
+검증 명령:
+
+```powershell
+python -m unittest discover -s tests
+```
