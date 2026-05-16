@@ -16,6 +16,8 @@ from src.markdown_writer import MarkdownWriter
 from src.obsidian_linker import build_related_links
 from src.summarizer import RuleBasedSummarizer
 
+SUPPORTED_INPUT_SUFFIXES = {".html", ".htm", ".txt", ".md"}
+
 
 def load_config(path: Path = Path("config.yaml")) -> dict[str, Any]:
     if not path.exists():
@@ -70,11 +72,26 @@ def archive_text(text: str, config: dict[str, Any]) -> Path | None:
 
 def handle_watch_path(path: Path, config: dict[str, Any]) -> bool:
     file_path = Path(path)
-    if file_path.suffix.lower() not in {".html", ".htm", ".txt", ".md"}:
+    if file_path.suffix.lower() not in SUPPORTED_INPUT_SUFFIXES:
         print(f"지원하지 않는 파일 무시: {file_path}")
         return False
     archive_text(read_input_file(file_path), config)
     return True
+
+
+def process_inbox_once(config: dict[str, Any]) -> int:
+    input_folder = Path(config["input_folder"]).expanduser()
+    input_folder.mkdir(parents=True, exist_ok=True)
+    count = 0
+    for path in sorted(input_folder.iterdir()):
+        if (
+            path.is_file()
+            and path.suffix.lower() in SUPPORTED_INPUT_SUFFIXES
+            and handle_watch_path(path, config)
+        ):
+            count += 1
+    print(f"inbox 1회 처리 완료: {count}개")
+    return count
 
 
 def watch_folder(config: dict[str, Any]) -> None:
@@ -126,6 +143,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     mode.add_argument("--clipboard", action="store_true", help="클립보드 텍스트 저장")
     mode.add_argument("--file", type=str, help="HTML/TXT/MD 파일 저장")
     mode.add_argument("--watch", action="store_true", help="입력 폴더 감시")
+    mode.add_argument("--process-inbox-once", action="store_true", help="입력 폴더를 한 번 처리")
     mode.add_argument("--rebuild-index", action="store_true", help="중복 인덱스 재생성")
     return parser.parse_args(argv)
 
@@ -141,6 +159,8 @@ def main() -> int:
             archive_text(read_input_file(Path(args.file)), config)
         elif args.watch:
             watch_folder(config)
+        elif args.process_inbox_once:
+            process_inbox_once(config)
         elif args.rebuild_index:
             rebuild_index(config)
         return 0

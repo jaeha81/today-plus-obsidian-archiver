@@ -175,6 +175,12 @@ Today Plus queue failed: inbox path is not writable
 python main.py --watch
 ```
 
+또는 장시간 감시 없이 inbox를 한 번만 처리한다.
+
+```powershell
+python main.py --config config.remote-devcore.yaml --process-inbox-once
+```
+
 3. Remote DevCore에서 테스트 메시지를 보낸다.
 4. Local Control Agent가 inbox 폴더에 `.md` 파일을 생성하는지 확인한다.
 5. 아카이버가 Obsidian TodayPlus 노트로 저장하는지 확인한다.

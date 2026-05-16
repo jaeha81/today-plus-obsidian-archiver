@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from main import archive_text, handle_watch_path, load_config, parse_args
+from main import archive_text, handle_watch_path, load_config, parse_args, process_inbox_once
 
 
 class MainWorkflowTest(unittest.TestCase):
@@ -57,6 +57,11 @@ class MainWorkflowTest(unittest.TestCase):
         self.assertEqual(args.config, "custom.yaml")
         self.assertEqual(args.file, "input.md")
 
+    def test_parse_args_accepts_process_inbox_once(self):
+        args = parse_args(["--process-inbox-once"])
+
+        self.assertTrue(args.process_inbox_once)
+
     def test_watch_path_ignores_temp_files(self):
         config = {"obsidian_vault_path": "unused"}
 
@@ -78,6 +83,25 @@ class MainWorkflowTest(unittest.TestCase):
         self.assertTrue(handled)
         read_input_file.assert_called_once_with(Path("today-plus.md"))
         archive_text_mock.assert_called_once_with("Today Plus content", config)
+
+    def test_process_inbox_once_handles_supported_files_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            input_folder = Path(tmp) / "inbox"
+            input_folder.mkdir()
+            (input_folder / "a.tmp").write_text("partial", encoding="utf-8")
+            (input_folder / "b.md").write_text("Today Plus markdown", encoding="utf-8")
+            (input_folder / "c.txt").write_text("Today Plus text", encoding="utf-8")
+            config = {"input_folder": str(input_folder), "obsidian_vault_path": "unused"}
+
+            with patch("main.handle_watch_path", return_value=True) as handle_watch_path_mock:
+                count = process_inbox_once(config)
+
+        self.assertEqual(count, 2)
+        handled_paths = [call.args[0] for call in handle_watch_path_mock.call_args_list]
+        self.assertEqual(
+            handled_paths,
+            [input_folder / "b.md", input_folder / "c.txt"],
+        )
 
 
 if __name__ == "__main__":

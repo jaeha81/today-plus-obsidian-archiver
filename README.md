@@ -94,6 +94,12 @@ copy config.example.remote-devcore.yaml config.remote-devcore.yaml
 python main.py --config config.remote-devcore.yaml --watch
 ```
 
+장시간 감시 없이 현재 inbox 파일만 한 번 처리하려면 아래 명령을 씁니다.
+
+```powershell
+python main.py --config config.remote-devcore.yaml --process-inbox-once
+```
+
 ## 중복 인덱스 재생성
 
 기존 TodayPlus 폴더의 Markdown 파일을 다시 읽어 `.today_plus_index.json`을 재생성합니다.

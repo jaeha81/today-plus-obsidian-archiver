@@ -176,3 +176,15 @@ git diff --check
 ```powershell
 python -m unittest tests.test_main_workflow
 ```
+
+### Inbox 1회 처리 모드 추가
+
+- `--process-inbox-once` CLI 옵션 추가
+- Remote DevCore 파일 드롭 테스트를 장시간 watch 프로세스 없이 처리 가능하게 함
+- README와 Remote DevCore 연동 문서에 실행 예시 추가
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_main_workflow
+```
