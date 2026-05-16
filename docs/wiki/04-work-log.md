@@ -55,3 +55,18 @@ python -m unittest discover -s tests
 python -m compileall main.py src tests
 git diff --check
 ```
+
+### Windows 실행 편의 보강
+
+- `scripts/run-clipboard.bat` 추가
+- `scripts/run-watch.bat` 추가
+- `scripts/install-task-scheduler.ps1` 추가
+- HTML fallback 파서의 링크 Markdown 변환 검증 강화
+- README에 배치 파일과 작업 스케줄러 등록 방법 추가
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_scripts
+python -m unittest tests.test_file_reader
+```

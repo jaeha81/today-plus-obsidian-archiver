@@ -39,6 +39,13 @@ python main.py --clipboard
 python main.py --config "C:/Users/YOUR_NAME/today-plus-config.yaml" --clipboard
 ```
 
+Windows에서는 배치 파일로도 실행할 수 있습니다.
+
+```powershell
+scripts\run-clipboard.bat
+scripts\run-clipboard.bat --config "C:/Users/YOUR_NAME/today-plus-config.yaml"
+```
+
 ## 파일 입력
 
 HTML, TXT, MD 파일을 직접 지정할 수 있습니다.
@@ -55,6 +62,13 @@ HTML은 `script`, `style`, `nav`, `footer`를 제거하고 본문 텍스트와 M
 
 ```powershell
 python main.py --watch
+```
+
+Windows에서는 배치 파일로도 실행할 수 있습니다.
+
+```powershell
+scripts\run-watch.bat
+scripts\run-watch.bat --config "C:/Users/YOUR_NAME/today-plus-config.yaml"
 ```
 
 ## 중복 인덱스 재생성
@@ -84,6 +98,14 @@ python D:\ai프로젝트\today-plus-obsidian-archiver\main.py --watch
 ```
 
 작업 스케줄러에서는 시작 위치를 프로젝트 폴더로 지정하세요.
+
+등록 스크립트를 쓰려면 PowerShell에서 프로젝트 폴더 기준으로 실행합니다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install-task-scheduler.ps1
+```
+
+기본으로 `TodayPlusArchiveClipboard`는 매일 09:00, `TodayPlusArchiveWatch`는 로그인 시 실행되도록 등록합니다.
 
 ## 테스트
 

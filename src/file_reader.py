@@ -9,6 +9,8 @@ class _TextHTMLParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self._skip_depth = 0
+        self._link_href: str | None = None
+        self._link_parts: list[str] = []
         self.parts: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
@@ -17,9 +19,18 @@ class _TextHTMLParser(HTMLParser):
         if tag == "a" and not self._skip_depth:
             href = dict(attrs).get("href")
             if href:
-                self.parts.append(f" (link: {href}) ")
+                self._link_href = href
+                self._link_parts = []
 
     def handle_endtag(self, tag: str) -> None:
+        if tag == "a" and self._link_href and not self._skip_depth:
+            label = clean_text(" ".join(self._link_parts))
+            if label:
+                self.parts.append(f"[{label}]({self._link_href})")
+            else:
+                self.parts.append(self._link_href)
+            self._link_href = None
+            self._link_parts = []
         if tag in {"script", "style", "nav", "footer"} and self._skip_depth:
             self._skip_depth -= 1
         if tag in {"p", "div", "br", "li", "h1", "h2", "h3"}:
@@ -27,7 +38,10 @@ class _TextHTMLParser(HTMLParser):
 
     def handle_data(self, data: str) -> None:
         if not self._skip_depth:
-            self.parts.append(data)
+            if self._link_href:
+                self._link_parts.append(data)
+            else:
+                self.parts.append(data)
 
 
 def read_input_file(path: Path) -> str:

@@ -22,11 +22,10 @@ Codex가 본 개발을 주도한다. Claude는 필요 시 보조 구현, 검수 
 
 ## 다음 추천 작업
 
-1. `scripts/run-clipboard.bat` 추가
-2. `scripts/run-watch.bat` 추가
-3. `scripts/install-task-scheduler.ps1` 추가
-4. `tests/test_file_reader.py`로 HTML 링크 변환 검증 강화
-5. 실제 Vault 경로에서 수동 smoke test
+1. 실제 Vault 경로에서 수동 smoke test
+2. 작업 스케줄러 등록 후 Windows 이벤트/작업 기록 확인
+3. README 사용자 친화 문구 보강
+4. GitHub Issues/Release notes 정리
 
 ## 세션 전환 시 Claude 보조 가능 작업
 
