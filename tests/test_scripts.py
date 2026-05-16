@@ -34,6 +34,20 @@ class ScriptsTest(unittest.TestCase):
         self.assertIn('"%~1"=="--help"', content)
         self.assertNotIn("--file \"%~1\" %*", content)
 
+    def test_daily_capture_runner_opens_chatgpt_without_scraping(self):
+        script = SCRIPTS_DIR / "run-daily-capture.bat"
+
+        self.assertTrue(script.exists())
+        content = script.read_text(encoding="utf-8")
+        self.assertIn("https://chatgpt.com", content)
+        self.assertIn("run-clipboard.bat", content)
+        self.assertIn("pause", content.lower())
+        self.assertIn('"%~1"=="--help"', content)
+        self.assertNotIn("cookie", content.lower())
+        self.assertNotIn("selenium", content.lower())
+        self.assertNotIn("playwright", content.lower())
+        self.assertNotIn("requests", content.lower())
+
     def test_task_scheduler_installer_registers_non_web_local_modes(self):
         script = SCRIPTS_DIR / "install-task-scheduler.ps1"
 

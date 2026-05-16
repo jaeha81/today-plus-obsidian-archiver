@@ -13,6 +13,17 @@ scripts\run-clipboard.bat
 scripts\run-clipboard.bat --config "C:/Users/YOUR_NAME/today-plus-config.yaml"
 ```
 
+## 매일 캡처 흐름
+
+PC에서 ChatGPT를 열고, 사용자가 직접 복사한 오늘의 플러스 내용을 바로 저장한다.
+
+```powershell
+scripts\run-daily-capture.bat
+scripts\run-daily-capture.bat --config "C:/Users/YOUR_NAME/today-plus-config.yaml"
+```
+
+이 스크립트는 ChatGPT URL을 열고 사용자가 복사할 때까지 대기한 뒤 `run-clipboard.bat`를 실행한다. 로그인 세션, 쿠키, 화면 내용을 자동으로 읽지 않는다.
+
 ## 파일 입력
 
 사용자가 직접 저장한 HTML, TXT, MD 파일을 지정한다.

@@ -104,3 +104,15 @@ python -m unittest tests.test_scripts
 ```powershell
 git diff --check
 ```
+
+### Daily capture 흐름 추가
+
+- `scripts/run-daily-capture.bat` 추가
+- ChatGPT를 열고 사용자가 직접 복사한 클립보드 내용을 저장하는 안전한 daily capture 흐름 문서화
+- 앱/웹 세션 자동 읽기, 쿠키 접근, 크롤링 금지 결정을 `docs/wiki/03-decisions.md`에 명시
+
+검증 명령:
+
+```powershell
+python -m unittest tests.test_scripts
+```

@@ -46,6 +46,15 @@ scripts\run-clipboard.bat
 scripts\run-clipboard.bat --config "C:/Users/YOUR_NAME/today-plus-config.yaml"
 ```
 
+매일 PC에서 ChatGPT를 열고, 복사 후 바로 저장하는 흐름은 아래 스크립트를 씁니다.
+
+```powershell
+scripts\run-daily-capture.bat
+scripts\run-daily-capture.bat --config "C:/Users/YOUR_NAME/today-plus-config.yaml"
+```
+
+이 스크립트는 ChatGPT를 열어 주고 사용자가 직접 복사한 클립보드 내용만 저장합니다. 로그인 세션, 쿠키, 화면 내용을 자동으로 읽지 않습니다.
+
 ## 파일 입력
 
 HTML, TXT, MD 파일을 직접 지정할 수 있습니다.
@@ -105,6 +114,8 @@ python D:\ai프로젝트\today-plus-obsidian-archiver\main.py --watch
 ```
 
 작업 스케줄러에서는 시작 위치를 프로젝트 폴더로 지정하세요.
+
+매일 확인 시간을 알림처럼 쓰고 싶으면 작업 스케줄러에서 `scripts\run-daily-capture.bat`를 실행 대상으로 등록합니다. 이 방식은 사용자가 직접 복사한 내용만 저장합니다.
 
 등록 스크립트를 쓰려면 PowerShell에서 프로젝트 폴더 기준으로 실행합니다.
 
