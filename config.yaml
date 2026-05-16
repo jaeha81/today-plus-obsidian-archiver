@@ -1,0 +1,18 @@
+obsidian_vault_path: "C:/Users/YOUR_NAME/Documents/ObsidianVault"
+output_folder: "00_Inbox/TodayPlus"
+input_folder: "C:/Users/YOUR_NAME/TodayPlus_Input"
+index_file: ".today_plus_index.json"
+language: "ko"
+default_tags:
+  - today-plus
+  - chatgpt
+  - ai-trend
+  - knowledge-base
+related_links:
+  - "AI 자동화"
+  - "ChatGPT"
+  - "콘텐츠 수익화"
+  - "Make.com"
+  - "지식 베이스"
+  - "인테리어 자동화"
+duplicate_similarity_threshold: 0.92

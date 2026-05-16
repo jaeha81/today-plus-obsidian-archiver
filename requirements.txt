@@ -1,0 +1,5 @@
+pyperclip
+pyyaml
+watchdog
+beautifulsoup4
+python-dateutil
