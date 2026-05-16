@@ -90,3 +90,14 @@ python D:\ai프로젝트\today-plus-obsidian-archiver\main.py --watch
 ```powershell
 python -m unittest discover -s tests
 ```
+
+## LLM Wiki
+
+개발 맥락, 요구사항, 아키텍처, 결정사항은 `docs/wiki`에 기록합니다.
+
+- `docs/wiki/00-overview.md`
+- `docs/wiki/01-requirements.md`
+- `docs/wiki/02-architecture.md`
+- `docs/wiki/03-decisions.md`
+- `docs/wiki/04-work-log.md`
+- `docs/wiki/05-claude-handoff.md`
