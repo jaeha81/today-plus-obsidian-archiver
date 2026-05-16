@@ -33,6 +33,12 @@ input_folder: "C:/Users/YOUR_NAME/TodayPlus_Input"
 python main.py --clipboard
 ```
 
+다른 설정 파일을 쓰려면 `--config`를 추가합니다.
+
+```powershell
+python main.py --config "C:/Users/YOUR_NAME/today-plus-config.yaml" --clipboard
+```
+
 ## 파일 입력
 
 HTML, TXT, MD 파일을 직접 지정할 수 있습니다.

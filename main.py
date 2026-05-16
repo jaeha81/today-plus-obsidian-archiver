@@ -109,19 +109,20 @@ def rebuild_index(config: dict[str, Any]) -> int:
     return count
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="ChatGPT 오늘의 플러스를 Obsidian 노트로 저장합니다.")
+    parser.add_argument("--config", default="config.yaml", help="설정 파일 경로")
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--clipboard", action="store_true", help="클립보드 텍스트 저장")
     mode.add_argument("--file", type=str, help="HTML/TXT/MD 파일 저장")
     mode.add_argument("--watch", action="store_true", help="입력 폴더 감시")
     mode.add_argument("--rebuild-index", action="store_true", help="중복 인덱스 재생성")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def main() -> int:
     args = parse_args()
-    config = load_config()
+    config = load_config(Path(args.config))
     logger = setup_logger(Path("logs/today_plus_archiver.log"))
     try:
         if args.clipboard:
