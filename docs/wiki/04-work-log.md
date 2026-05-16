@@ -252,3 +252,18 @@ powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-file-dro
 python -m unittest tests.test_scripts
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-cli-e2e.ps1
 ```
+
+### 운영 E2E 및 동일 날짜 덮어쓰기 방지
+
+- 같은 날짜 TodayPlus 노트가 이미 있을 때 새 수집분이 기존 노트를 덮어쓰는 위험을 회귀 테스트로 재현
+- `archive_text`를 수정해 오늘 날짜 노트가 이미 있으면 새 수집분을 `## 추가 수집분`으로 append하도록 변경
+- `scripts/run-remote-devcore-operational-e2e.ps1` 추가
+- 실제 `inbox`와 sibling `jh-obsidian` Vault의 `000-Inbox/TodayPlus`를 대상으로 Remote DevCore CLI -> archiver 처리 -> Obsidian 노트 쓰기를 검증
+- 운영 inbox 파일과 `processed` 산출물이 Git에 잡히지 않도록 `.gitignore` 보강
+
+검증 명령:
+
+```powershell
+python -m unittest discover -s tests
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-remote-devcore-operational-e2e.ps1
+```

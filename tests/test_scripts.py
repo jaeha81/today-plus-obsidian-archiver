@@ -74,6 +74,24 @@ class ScriptsTest(unittest.TestCase):
         self.assertIn("DEVCORE_DROPPED_FILES", content)
         self.assertIn("VAULT_NOTE_COUNT", content)
 
+    def test_remote_devcore_operational_e2e_script_uses_real_inbox_and_parameterized_vault(self):
+        script = SCRIPTS_DIR / "run-remote-devcore-operational-e2e.ps1"
+
+        self.assertTrue(script.exists())
+        content = script.read_text(encoding="utf-8")
+        self.assertIn("[string]$VaultPath", content)
+        self.assertIn("jh-obsidian", content)
+        self.assertIn("000-Inbox/TodayPlus", content)
+        self.assertIn("TODAY_PLUS_INBOX", content)
+        self.assertIn("node", content)
+        self.assertIn("src/cli.js", content)
+        self.assertIn("--process-inbox-once", content)
+        self.assertIn("--archive-processed", content)
+        self.assertIn("AI automation", content)
+        self.assertIn("LASTEXITCODE", content)
+        self.assertIn('Filter "$noteDate*.md"', content)
+        self.assertIn("OPERATIONAL_NOTE_PATH", content)
+
     def test_file_runner_exists_and_uses_file_mode(self):
         script = SCRIPTS_DIR / "run-file.bat"
 
@@ -118,6 +136,13 @@ class ScriptsTest(unittest.TestCase):
         self.assertIn("[string]$ConfigPath", content)
         self.assertIn("--config", content)
         self.assertIn("Test-Path $ConfigPath", content)
+
+    def test_gitignore_excludes_runtime_inbox_outputs(self):
+        gitignore = PROJECT_ROOT / ".gitignore"
+
+        content = gitignore.read_text(encoding="utf-8")
+        self.assertIn("inbox/*.md", content)
+        self.assertIn("inbox/processed/", content)
 
 
 if __name__ == "__main__":

@@ -48,10 +48,10 @@ def archive_text(text: str, config: dict[str, Any]) -> Path | None:
     related_links = build_related_links(text, config.get("related_links", []))
     note_path = writer.note_path(today)
 
-    if duplicate.is_similar and note_path.exists():
+    if note_path.exists():
         writer.append_collection(note_path, text)
         dedup.record(text, note_path)
-        print(f"유사 내용 추가 수집분으로 저장: {note_path}")
+        print(f"추가 수집분으로 저장: {note_path}")
         return note_path
 
     note_path = writer.write_new_note(

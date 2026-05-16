@@ -29,6 +29,37 @@ class MainWorkflowTest(unittest.TestCase):
             self.assertTrue(note_path.exists())
             self.assertTrue((vault / "00_Inbox/TodayPlus/.today_plus_index.json").exists())
 
+    def test_archiving_second_distinct_capture_preserves_existing_daily_note(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            vault = Path(tmp) / "vault"
+            vault.mkdir()
+            config = {
+                "obsidian_vault_path": str(vault),
+                "output_folder": "00_Inbox/TodayPlus",
+                "index_file": ".today_plus_index.json",
+                "default_tags": ["today-plus", "chatgpt"],
+                "related_links": [],
+                "duplicate_similarity_threshold": 0.92,
+            }
+
+            note_path = archive_text(
+                "First distinct capture about AI automation workflows and operational notes.",
+                config,
+            )
+            first_content = note_path.read_text(encoding="utf-8")
+
+            second_note_path = archive_text(
+                "Second unrelated capture about interior business planning and sales scripts.",
+                config,
+            )
+            second_content = second_note_path.read_text(encoding="utf-8")
+
+            self.assertEqual(second_note_path, note_path)
+            self.assertIn("First distinct capture", second_content)
+            self.assertIn("Second unrelated capture", second_content)
+            self.assertIn("## 추가 수집분", second_content)
+            self.assertGreater(len(second_content), len(first_content))
+
     def test_loads_explicit_config_path(self):
         with tempfile.TemporaryDirectory() as tmp:
             config_path = Path(tmp) / "custom.yaml"

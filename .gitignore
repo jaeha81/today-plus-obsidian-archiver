@@ -6,3 +6,8 @@ venv/
 logs/*.log
 *.egg-info/
 .today_plus_index.json
+inbox/*.html
+inbox/*.htm
+inbox/*.md
+inbox/*.txt
+inbox/processed/

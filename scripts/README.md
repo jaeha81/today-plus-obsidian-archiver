@@ -79,6 +79,14 @@ powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-cli-e2e.
 
 스크립트는 sibling 폴더 `jH Remote DevCore`를 찾아 `TODAY_PLUS_INBOX`를 임시 inbox로 지정하고, `node src/cli.js --text ...` 실행 후 archiver의 `--process-inbox-once --archive-processed`까지 검증한다.
 
+실제 로컬 inbox와 sibling `jh-obsidian` Vault를 대상으로 운영 E2E를 확인하려면 아래 명령을 실행한다.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-remote-devcore-operational-e2e.ps1
+```
+
+기본 출력 폴더는 `000-Inbox/TodayPlus`이며, `-VaultPath`, `-OutputFolder`, `-InboxPath`, `-RemoteDevCoreDir`로 경로를 바꿀 수 있다.
+
 ## 작업 스케줄러 등록
 
 기본 등록:

@@ -127,6 +127,14 @@ Remote DevCore CLI까지 포함한 교차 프로젝트 E2E는 아래 명령으�
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-cli-e2e.ps1
 ```
 
+실제 로컬 inbox와 `D:\ai프로젝트\jh-obsidian` Vault를 대상으로 운영 E2E를 확인하려면 아래 명령을 사용합니다.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-remote-devcore-operational-e2e.ps1
+```
+
+운영 E2E는 `000-Inbox/TodayPlus`에 오늘 날짜 노트를 만들거나 기존 오늘 노트에 `추가 수집분`으로 붙입니다. 같은 날짜에 여러 번 수집해도 기존 노트를 덮어쓰지 않습니다.
+
 ## 중복 인덱스 재생성
 
 기존 TodayPlus 폴더의 Markdown 파일을 다시 읽어 `.today_plus_index.json`을 재생성합니다.
