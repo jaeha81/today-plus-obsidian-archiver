@@ -127,6 +127,14 @@ Remote DevCore CLI까지 포함한 교차 프로젝트 E2E는 아래 명령으�
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-cli-e2e.ps1
 ```
 
+Discord text input and Whisper transcript input can be verified locally without live bot startup or OpenAI API use:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-input-routes.ps1
+```
+
+The operational user flow is documented in `docs/mobile-discord-to-obsidian-runbook.md`.
+
 실제 로컬 inbox와 `D:\ai프로젝트\jh-obsidian` Vault를 대상으로 운영 E2E를 확인하려면 아래 명령을 사용합니다.
 
 ```powershell

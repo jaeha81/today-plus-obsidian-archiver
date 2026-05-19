@@ -77,6 +77,14 @@ Remote DevCore CLI가 실제로 inbox 파일을 쓰고 archiver가 처리하는 
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-cli-e2e.ps1
 ```
 
+Discord text JSON route and Whisper transcript-file route can be verified without starting live Discord or using an OpenAI API key:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-input-routes.ps1
+```
+
+This smoke creates a local Discord `MESSAGE_CREATE` JSON file and a local voice transcript text file, runs Remote DevCore with `--discord-message` and `--file`, then processes the resulting inbox files with `--process-inbox-once --archive-processed`. It does not connect to Discord Gateway and does not call Whisper/OpenAI.
+
 스크립트는 sibling 폴더 `jH Remote DevCore`를 찾아 `TODAY_PLUS_INBOX`를 임시 inbox로 지정하고, `node src/cli.js --text ...` 실행 후 archiver의 `--process-inbox-once --archive-processed`까지 검증한다.
 
 실제 로컬 inbox와 sibling `jh-obsidian` Vault를 대상으로 운영 E2E를 확인하려면 아래 명령을 실행한다.

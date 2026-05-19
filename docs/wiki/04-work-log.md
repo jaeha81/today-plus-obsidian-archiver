@@ -267,3 +267,19 @@ powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-cli-e2e.
 python -m unittest discover -s tests
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-remote-devcore-operational-e2e.ps1
 ```
+
+### Discord/Whisper local route smoke and runbook
+
+- Added `scripts/smoke-remote-devcore-input-routes.ps1`.
+- The smoke verifies Remote DevCore `--discord-message` with a local Discord `MESSAGE_CREATE` JSON file.
+- The smoke verifies the Whisper-side transcript path with Remote DevCore `--file`, without OpenAI API use.
+- Both generated inbox files are processed by the archiver with `--process-inbox-once --archive-processed`.
+- Added `docs/mobile-discord-to-obsidian-runbook.md` for the mobile/Discord -> Remote DevCore -> Obsidian operating flow.
+- Live Discord bot execution, OpenAI Whisper verification, Task Scheduler registration, and long-running watch setup remain approval-required steps.
+
+Verification commands:
+
+```powershell
+python -m unittest tests.test_scripts
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-input-routes.ps1
+```

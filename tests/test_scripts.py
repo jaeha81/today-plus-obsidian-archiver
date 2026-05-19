@@ -74,6 +74,23 @@ class ScriptsTest(unittest.TestCase):
         self.assertIn("DEVCORE_DROPPED_FILES", content)
         self.assertIn("VAULT_NOTE_COUNT", content)
 
+    def test_remote_devcore_input_routes_smoke_script_covers_discord_and_whisper_text_paths(self):
+        script = SCRIPTS_DIR / "smoke-remote-devcore-input-routes.ps1"
+
+        self.assertTrue(script.exists())
+        content = script.read_text(encoding="utf-8")
+        self.assertIn("--discord-message", content)
+        self.assertIn("--file", content)
+        self.assertIn("TODAY_PLUS_SOURCE", content)
+        self.assertIn("discord-text-local-smoke", content)
+        self.assertIn("whisper-text-local-smoke", content)
+        self.assertIn("DISCORD_ROUTE_DROPPED_FILES", content)
+        self.assertIn("WHISPER_ROUTE_DROPPED_FILES", content)
+        self.assertIn("--process-inbox-once", content)
+        self.assertIn("--archive-processed", content)
+        self.assertIn("VAULT_NOTE_COUNT", content)
+        self.assertIn("UTF8Encoding($false)", content)
+
     def test_remote_devcore_operational_e2e_script_uses_real_inbox_and_parameterized_vault(self):
         script = SCRIPTS_DIR / "run-remote-devcore-operational-e2e.ps1"
 
@@ -143,6 +160,18 @@ class ScriptsTest(unittest.TestCase):
         content = gitignore.read_text(encoding="utf-8")
         self.assertIn("inbox/*.md", content)
         self.assertIn("inbox/processed/", content)
+
+    def test_mobile_discord_to_obsidian_runbook_documents_operational_flow(self):
+        doc = PROJECT_ROOT / "docs" / "mobile-discord-to-obsidian-runbook.md"
+
+        self.assertTrue(doc.exists())
+        content = doc.read_text(encoding="utf-8")
+        self.assertIn("Mobile/Discord -> Remote DevCore -> Obsidian", content)
+        self.assertIn("Discord text", content)
+        self.assertIn("Whisper voice", content)
+        self.assertIn("Approval required", content)
+        self.assertIn("smoke-remote-devcore-input-routes.ps1", content)
+        self.assertIn("run-process-inbox-once.bat", content)
 
 
 if __name__ == "__main__":

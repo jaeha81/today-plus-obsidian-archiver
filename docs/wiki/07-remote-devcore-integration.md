@@ -187,6 +187,14 @@ python main.py --config config.remote-devcore.yaml --process-inbox-once
 python main.py --config config.remote-devcore.yaml --process-inbox-once --archive-processed
 ```
 
+Discord text and Whisper transcript routes can be checked locally without live bot startup:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-remote-devcore-input-routes.ps1
+```
+
+This script uses Remote DevCore `--discord-message` and `--file`, confirms both routes drop Today Plus inbox files, then verifies archiver processing into a temporary Obsidian vault.
+
 이 옵션은 처리 성공한 지원 확장자 파일만 `inbox/processed/`로 이동한다. 같은 파일명이 이미 있으면 덮어쓰지 않고 `-1`, `-2` 같은 suffix를 붙인다.
 
 3. Remote DevCore에서 테스트 메시지를 보낸다.
